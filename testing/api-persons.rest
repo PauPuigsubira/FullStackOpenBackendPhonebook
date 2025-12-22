@@ -1,0 +1,18 @@
+GET https://full-stack-open-backend-phonebook.onrender.com/api/persons
+
+###
+
+GET https://full-stack-open-backend-phonebook.onrender.com/api/persons/3
+
+###
+
+POST https://full-stack-open-backend-phonebook.onrender.com/api/persons
+Content-Type: application/json
+
+{
+    "name": "Test User",
+    "number": "123-4567890"
+}
+
+###
+DELETE https://full-stack-open-backend-phonebook.onrender.com/api/persons/3

@@ -1,0 +1,41 @@
+GET http://localhost:3001/api/persons
+
+###
+
+GET http://localhost:3001/api/persons/69495b06c50f49111bbc146e
+
+###
+POST http://localhost:3001/api/persons
+Content-Type: application/json
+
+{
+    "number": "040-123456"
+}
+###
+POST http://localhost:3001/api/persons
+Content-Type: application/json
+
+{
+    "name": "Local Test User"
+}
+###
+
+POST http://localhost:3001/api/persons
+Content-Type: application/json
+
+{
+    "name": "Local Test User",
+    "number": "040-123456"
+}
+
+###
+POST http://localhost:3001/api/persons
+Content-Type: application/json
+
+{
+    "name": "Local Test User",
+    "number": "123-4567890"
+}
+
+###
+DELETE http://localhost:3001/api/persons/694973ccb02bb4427c40e114
