@@ -34,9 +34,14 @@ app.get("/", (request, response) => {
 });
 */
 app.get("/info", (request, response) => {
-  const text1 = `<p>Phonebook has info for ${persons.length} people</p>`;
-  const text2 = `<p>Current date and time ${Date().toString()}</p>`;
-  response.send(text1 + text2);
+  Person
+    .find({})
+    .then((persons) => {
+      console.log("persons", persons);
+      const text1 = `<p>Phonebook has info for ${persons.length} people</p>`;
+      const text2 = `<p>Current date and time ${Date().toString()}</p>`;
+      response.send(text1 + text2);
+    });
 });
 
 app.get("/api/persons", (request, response) => {
@@ -48,7 +53,7 @@ app.get("/api/persons", (request, response) => {
   });
 });
 
-app.get("/api/persons/:id", (request, response) => {
+app.get("/api/persons/:id", (request, response, next) => {
   const id = request.params.id;
 
   Person
@@ -60,13 +65,16 @@ app.get("/api/persons/:id", (request, response) => {
         response.status(404).end("<p>No contact found</p>");
       }
     })
+    /*
     .catch((error) => {
       console.log(error);
       response.status(400).send({ error: "malformatted id" });
     });
+    */
+    .catch((error) => next(error));
 });
 
-app.post("/api/persons/", (request, response) => {
+app.post("/api/persons/", (request, response, next) => {
   console.log("call to post (new/update)");
   const { name, number } = request.body;
 
@@ -99,10 +107,13 @@ app.post("/api/persons/", (request, response) => {
                 response.status(201).json(result);
               }
             })
+            /*
             .catch((error) => {
               console.log("error adding/updating person:", error);
               response.status(500).json({ error: "error addingupdating person" });
-            });        
+            });
+            */
+            .catch((error) => next(error));        
       }
     });
 
@@ -130,7 +141,7 @@ app.post("/api/persons/", (request, response) => {
   */
 });
 
-app.delete("/api/persons/:id", (request, response) => {
+app.delete("/api/persons/:id", (request, response, next) => {
   const id = request.params.id;
 
   Person
@@ -138,10 +149,13 @@ app.delete("/api/persons/:id", (request, response) => {
     .then(() => {
       response.status(204).end();
     })
+    /*
     .catch((error) => {
       console.log(error);
       response.status(400).send({ error: "malformatted id" });
     });
+    */
+    .catch((error) => next(error));
   /*
     persons = persons.filter((person) => person.id !== id);
     console.log("delete id", id, persons);
@@ -154,6 +168,9 @@ const unknownEndpoint = (request, response) => {
 };
 
 app.use(unknownEndpoint);
+
+const errorHandler = require("./middelwares/errorHandler");
+app.use(errorHandler);
 
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
