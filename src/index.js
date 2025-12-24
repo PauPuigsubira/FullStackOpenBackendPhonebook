@@ -28,11 +28,11 @@ const morganLog = (tokens, req, res) => {
 app.use(morgan(morganLog));
 
 let persons = [];
-
+/*
 app.get("/", (request, response) => {
   response.send("<h1>Phonebook back server</h1>");
 });
-
+*/
 app.get("/info", (request, response) => {
   const text1 = `<p>Phonebook has info for ${persons.length} people</p>`;
   const text2 = `<p>Current date and time ${Date().toString()}</p>`;
@@ -50,7 +50,7 @@ app.get("/api/persons", (request, response) => {
 
 app.get("/api/persons/:id", (request, response) => {
   const id = request.params.id;
-  
+
   Person
     .findById(id)
     .then((person) => {
@@ -89,7 +89,9 @@ app.post("/api/persons/", (request, response) => {
               filter, update, { upsert: true }
             )
             .then((result) => {
-              if (result.lastErrorObject && result.lastErrorObject.updatedExisting) {
+              console.log(result)
+              // if (result.lastErrorObject && result.lastErrorObject.updatedExisting) {
+              if (result) {
               console.log("updatedPerson", result);
               response.status(206).json(result);
               } else {

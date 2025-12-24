@@ -2,6 +2,12 @@ GET http://localhost:3001/api/persons
 
 ###
 
+GET http://localhost:3001/api/persons/5
+###
+
+GET http://localhost:3001/api/persons/5c41c90e84d891c15dfa3431
+###
+
 GET http://localhost:3001/api/persons/69495b06c50f49111bbc146e
 
 ###
@@ -33,8 +39,8 @@ POST http://localhost:3001/api/persons
 Content-Type: application/json
 
 {
-    "name": "Local Test User",
-    "number": "123-4567890"
+    "name": "Aida Angurrienta",
+    "number": "0037-333-3456789"
 }
 
 ###
