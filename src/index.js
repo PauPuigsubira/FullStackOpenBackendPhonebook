@@ -91,29 +91,37 @@ app.post("/api/persons/", (request, response, next) => {
         } else {
           console.log('After check for existing number, proceeding to add/update person')
           const filter = { name: name };
-          const update = { number: number };
+          const update = { ...filter, number: number };
+          const options = {
+            new: true,
+            upsert: true,
+            runValidators: true,
+            context: 'query',
+            includeResultMetadata: true
+          };
+
           Person
             .findOneAndUpdate(
-              filter, update, { upsert: true }
+              filter, update, options
             )
             .then((result) => {
-              console.log(result)
-              // if (result.lastErrorObject && result.lastErrorObject.updatedExisting) {
-              if (result) {
+              console.log('findOneAndUpdate result', result)
+              if (result.lastErrorObject && result.lastErrorObject.updatedExisting === true) {
+              //if (result.lastErrorObject.updatedExisting === true) {
               console.log("updatedPerson", result);
-              response.status(206).json(result);
+              response.status(206).json(result.value);
               } else {
                 console.log("added new person", result);
-                response.status(201).json(result);
+                response.status(201).json(result.value);
               }
             })
+            .catch((error) => next(error))      
             /*
             .catch((error) => {
               console.log("error adding/updating person:", error);
               response.status(500).json({ error: "error addingupdating person" });
             });
             */
-            .catch((error) => next(error));        
       }
     });
 

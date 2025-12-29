@@ -39,8 +39,35 @@ POST http://localhost:3001/api/persons
 Content-Type: application/json
 
 {
-    "name": "Aida Angurrienta",
+    "name": "Silvana Quejica",
+    "number": "0038-7866743"
+}
+
+###
+POST http://localhost:3001/api/persons
+Content-Type: application/json
+
+{
+    "name": "Nuevo Contacto",
+    "number": "957651662233"
+}
+
+###
+POST http://localhost:3001/api/persons
+Content-Type: application/json
+
+{
+    "name": "KO",
     "number": "0037-333-3456789"
+}
+
+###
+POST http://localhost:3001/api/persons
+Content-Type: application/json
+
+{
+    "name": "KO por phonenumber",
+    "number": "0037-33"
 }
 
 ###
