@@ -27,7 +27,6 @@ const morganLog = (tokens, req, res) => {
 
 app.use(morgan(morganLog));
 
-let persons = [];
 /*
 app.get("/", (request, response) => {
   response.send("<h1>Phonebook back server</h1>");
