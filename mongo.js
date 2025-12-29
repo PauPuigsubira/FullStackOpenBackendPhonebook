@@ -28,10 +28,10 @@ const connection = (query) => {
 }
 
 const defaultPersons = [
-  { name: 'Arto Hellas', number: '040-123456'},
+  { name: 'Arto Hellas', number: '040-123456' },
   { name: 'Ada Lovelace', number: '39-44-5323523' },
-  { name: 'Dan Abramov', number: '12-43-234345'},
-  { name: 'Mary Poppendieck', number: '39-23-6423122'}
+  { name: 'Dan Abramov', number: '12-43-234345' },
+  { name: 'Mary Poppendieck', number: '39-23-6423122' }
 ]
 switch (process.argv.length) {
   case 3: {
@@ -60,8 +60,8 @@ switch (process.argv.length) {
             .then(result => {
                 console.log('added', result)
             })
-            .catch(err => console.log(err) )  
-          
+            .catch(err => console.log(err) )
+
           console.log('phonebook is empty')
         } else {
           console.log('phonebook:', persons)

@@ -82,7 +82,7 @@ app.post("/api/persons/", (request, response, next) => {
   }
 
   Person
-    .find({number: number})
+    .find({ number: number })
     .then((person) => {
       if (person.length > 0) {
         console.log("persons with number", person);
@@ -114,7 +114,7 @@ app.post("/api/persons/", (request, response, next) => {
                 response.status(201).json(result.value);
               }
             })
-            .catch((error) => next(error))      
+            .catch((error) => next(error))
             /*
             .catch((error) => {
               console.log("error adding/updating person:", error);

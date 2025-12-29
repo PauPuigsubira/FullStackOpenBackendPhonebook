@@ -4,7 +4,7 @@ const errorHandler = (err, req, res, next) => {
   console.error('Error message', err.message);
 
   if (
-    err.name.match(/CastError|BSONError/) && 
+    err.name.match(/CastError|BSONError/) &&
     err.kind === "ObjectId"
   ) {
     return res.status(400).send({ error: "malformatted id" });
